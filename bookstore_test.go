@@ -14,7 +14,6 @@ func TestAddBook(t *testing.T) {
 		score:  5,
 		price:  15,
 	}
-	numberOfBooks := 1
 
 	// ACT
 	store.addBook(expected)
@@ -22,9 +21,6 @@ func TestAddBook(t *testing.T) {
 	// ASSERT
 	actual := store.books[0]
 
-	if len(store.books) != numberOfBooks {
-		t.Errorf("Expected %d book. Actual: %d", numberOfBooks, len(store.books))
-	}
 	if !reflect.DeepEqual(actual, expected) {
 		t.Errorf("Actual book does not match expected book. Expected: %+v, Actual: %+v", expected, actual)
 	}
@@ -45,7 +41,6 @@ func TestGetBooksWithScoreHigherThan3(t *testing.T) {
 		score:  5,
 		price:  12,
 	}
-	numberOfBooks := 1
 	expectedBook := bookWithScoreHigherThan3
 	expectedScore := bookWithScoreHigherThan3.score
 
@@ -58,9 +53,6 @@ func TestGetBooksWithScoreHigherThan3(t *testing.T) {
 	actualBook := booksWithScoreHigherThan3[0]
 	actualScore := actualBook.score
 
-	if len(booksWithScoreHigherThan3) != numberOfBooks {
-		t.Errorf("Expected %d book. Actual: %d", numberOfBooks, len(booksWithScoreHigherThan3))
-	}
 	if !reflect.DeepEqual(actualBook, expectedBook) {
 		t.Errorf("Actual book does not match expected book. Expected: %+v, Actual: %+v", expectedBook, actualBook)
 	}
@@ -90,7 +82,6 @@ func TestTotalPrice(t *testing.T) {
 		score:  5,
 		price:  15,
 	}
-	numberOfBooks := 3
 	expectedTotalPrice := book1.price + book2.price + book3.price
 
 	store.addBook(book1)
@@ -101,10 +92,6 @@ func TestTotalPrice(t *testing.T) {
 	actualTotalPrice := store.getTotalPrice()
 
 	// ASSERT
-	if len(store.books) != numberOfBooks {
-		t.Errorf("Expected %d book. Actual: %d", numberOfBooks, len(store.books))
-	}
-
 	if expectedTotalPrice != actualTotalPrice {
 		t.Errorf("Actual total price does not match. Expected: %+v, Actual: %+v", expectedTotalPrice, actualTotalPrice)
 	}

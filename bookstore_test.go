@@ -10,6 +10,7 @@ func TestAddBook(t *testing.T) {
 		author: "Marshall B. Rosenberg",
 		title:  "nonviolent communication",
 		score:  7,
+		price:  15,
 	}
 	numberOfBooks := 1
 

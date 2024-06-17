@@ -30,12 +30,14 @@ func main() {
 		author: "Stephen King",
 		title:  "the long walk",
 		score:  2,
+		price:  8,
 	}
 
 	book2 := book{
 		author: "Andy Weir",
 		title:  "the martian",
 		score:  5,
+		price:  9,
 	}
 
 	var store bookStore
@@ -51,6 +53,7 @@ type book struct {
 	author string
 	title  string
 	score  int
+	price  int
 }
 
 func (b book) Title() string {

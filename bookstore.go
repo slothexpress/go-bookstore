@@ -29,7 +29,8 @@ func main() {
 	var store bookStore
 	store.utilsAddBooks()
 
-	store.getBooksWithScoreHigherThan(3)
+	goodBooks := store.getBooksWithScoreHigherThan(3)
+	printBooks(goodBooks)
 }
 
 type book struct {
@@ -45,6 +46,16 @@ func (b book) Title() string {
 
 type bookStore struct {
 	books []book
+}
+
+func printBooks(books []book) {
+	for _, b := range books {
+		fmt.Println()
+		fmt.Print(b.title)
+		fmt.Printf(" (%s)", b.author)
+		fmt.Println()
+		fmt.Println(b.score)
+	}
 }
 
 func (bs *bookStore) getTotalPrice() int {
@@ -63,11 +74,6 @@ func (bs *bookStore) getBooksWithScoreHigherThan(minScore int) []book {
 	for _, b := range bs.books {
 		if b.score > minScore {
 			filteredBooks = append(filteredBooks, b)
-			fmt.Println()
-			fmt.Print(b.title)
-			fmt.Printf(" (%s)", b.author)
-			fmt.Println()
-			fmt.Println(b.score)
 		}
 	}
 

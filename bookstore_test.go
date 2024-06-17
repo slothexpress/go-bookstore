@@ -1,8 +1,9 @@
 package main
 
 import (
-	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAddBook(t *testing.T) {
@@ -21,9 +22,7 @@ func TestAddBook(t *testing.T) {
 	// ASSERT
 	actual := store.books[0]
 
-	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Actual book does not match expected book. Expected: %+v, Actual: %+v", expected, actual)
-	}
+	assert.Equal(t, expected, actual, "Expected book does not match actual book.\nExpected: %+v\nActual:   %+v", expected, actual)
 }
 
 func TestGetBooksWithScoreHigherThan3(t *testing.T) {
@@ -41,27 +40,26 @@ func TestGetBooksWithScoreHigherThan3(t *testing.T) {
 		score:  5,
 		price:  12,
 	}
-	expectedBook := bookWithScoreHigherThan3
-	expectedScore := bookWithScoreHigherThan3.score
+	minScore := 3
+	expected := bookWithScoreHigherThan3
 
-	// ACT
 	store.addBook(bookWithScoreLowerThan3)
 	store.addBook(bookWithScoreHigherThan3)
-	booksWithScoreHigherThan3 := store.getBooksWithScoreHigherThan(3)
+
+	// ACT
+	booksWithScoreHigherThan3 := store.getBooksWithScoreHigherThan(minScore)
 
 	// ASSERT
-	actualBook := booksWithScoreHigherThan3[0]
-	actualScore := actualBook.score
+	actual := booksWithScoreHigherThan3[0]
+	actualScore := actual.score
 
-	if !reflect.DeepEqual(actualBook, expectedBook) {
-		t.Errorf("Actual book does not match expected book. Expected: %+v, Actual: %+v", expectedBook, actualBook)
-	}
-	if expectedScore != actualScore {
-		t.Errorf("Actual book score does not match. Expected: %+v, Actual: %+v", expectedScore, actualScore)
-	}
+	assert.Equal(t, expected, actual,
+		"Expected book does not match actual book.\nExpected: %+v\nActual:   %+v", expected, actual)
+	assert.True(t, actualScore > minScore,
+		"Score is not higher than minimum score.\nMinScore: %+v\nActual:   %+v", minScore, actualScore)
 }
 
-func TestTotalPrice(t *testing.T) {
+func TestGetTotalPrice(t *testing.T) {
 	// ARRANGE
 	var store bookStore
 	book1 := book{
@@ -82,17 +80,16 @@ func TestTotalPrice(t *testing.T) {
 		score:  5,
 		price:  15,
 	}
-	expectedTotalPrice := book1.price + book2.price + book3.price
+	expected := book1.price + book2.price + book3.price
 
 	store.addBook(book1)
 	store.addBook(book2)
 	store.addBook(book3)
 
 	// ACT
-	actualTotalPrice := store.getTotalPrice()
+	actual := store.getTotalPrice()
 
 	// ASSERT
-	if expectedTotalPrice != actualTotalPrice {
-		t.Errorf("Actual total price does not match. Expected: %+v, Actual: %+v", expectedTotalPrice, actualTotalPrice)
-	}
+	assert.Equal(t, expected, actual,
+		"Actual total price does not match. Expected: %+v, Actual: %+v", expected, actual)
 }

@@ -32,6 +32,8 @@ func main() {
 	for _, book := range store.books {
 		fmt.Println(book.title)
 	}
+
+	store.getBooksWithScoreHigherThan(3)
 }
 
 type book struct {
@@ -47,6 +49,10 @@ func (b book) Title() string {
 
 type bookStore struct {
 	books []book
+}
+
+func (bs *bookStore) getBooksWithScoreHigherThan(minScore int) []book {
+	return bs.books
 }
 
 func (bs *bookStore) addBook(b book) {

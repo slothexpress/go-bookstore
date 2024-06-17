@@ -26,23 +26,8 @@ package main
 import "fmt"
 
 func main() {
-	book1 := book{
-		author: "Stephen King",
-		title:  "the long walk",
-		score:  2,
-		price:  8,
-	}
-
-	book2 := book{
-		author: "Andy Weir",
-		title:  "the martian",
-		score:  5,
-		price:  9,
-	}
-
 	var store bookStore
-	store.addBook(book1)
-	store.addBook(book2)
+	store.utilsAddBooks()
 
 	for _, book := range store.books {
 		fmt.Println(book.title)
@@ -66,4 +51,57 @@ type bookStore struct {
 
 func (bs *bookStore) addBook(b book) {
 	bs.books = append(bs.books, b)
+}
+
+func (bs *bookStore) utilsAddBooks() {
+	book1 := book{
+		author: "Stephen King",
+		title:  "the long walk",
+		score:  2,
+		price:  8,
+	}
+
+	book2 := book{
+		author: "Andy Weir",
+		title:  "the martian",
+		score:  5,
+		price:  9,
+	}
+
+	book3 := book{
+		author: "Marshall B. Rosenberg",
+		title:  "nonviolent communication",
+		score:  5,
+		price:  15,
+	}
+
+	book4 := book{
+		author: "bell hooks",
+		title:  "all about love",
+		score:  4,
+		price:  11,
+	}
+
+	book5 := book{
+		author: "Susan Cain",
+		title:  "quiet",
+		score:  3,
+		price:  10,
+	}
+
+	book6 := book{
+		author: "Marc Bracket",
+		title:  "permission to feel",
+		score:  4,
+		price:  14,
+	}
+
+	book7 := book{
+		author: "Tricia Hersey",
+		title:  "rest is resistance",
+		score:  5,
+		price:  12,
+	}
+
+	bs.books = append(bs.books, book1, book2, book3, book4, book5, book6, book7)
 }

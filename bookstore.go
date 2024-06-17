@@ -31,6 +31,8 @@ func main() {
 
 	goodBooks := store.getBooksWithScoreHigherThan(3)
 	printBooks(goodBooks)
+
+	fmt.Println("\nTotal price for all books:", store.getTotalPrice())
 }
 
 type book struct {

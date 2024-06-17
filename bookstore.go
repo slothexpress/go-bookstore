@@ -51,7 +51,7 @@ type bookStore struct {
 func printBooks(books []book) {
 	for _, b := range books {
 		fmt.Println()
-		fmt.Print(b.title)
+		fmt.Print(b.Title())
 		fmt.Printf(" (%s)", b.author)
 		fmt.Println()
 		fmt.Println(b.score)

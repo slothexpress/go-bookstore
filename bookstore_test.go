@@ -60,3 +60,40 @@ func TestGetBooksWithScoreHigherThan3(t *testing.T) {
 		t.Errorf("Actual book score does not match. Expected: %+v, Actual: %+v", expectedScore, actualScore)
 	}
 }
+
+func TestTotalPrice(t *testing.T) {
+	var store bookStore
+	book1 := book{
+		author: "Stephen King",
+		title:  "the long walk",
+		score:  2,
+		price:  8,
+	}
+	book2 := book{
+		author: "Tricia Hersey",
+		title:  "rest is resistance",
+		score:  5,
+		price:  12,
+	}
+	book3 := book{
+		author: "Marshall B. Rosenberg",
+		title:  "nonviolent communication",
+		score:  5,
+		price:  15,
+	}
+	numberOfBooks := 3
+	expectedTotalPrice := book1.price + book2.price + book3.price
+
+	store.addBook(book1)
+	store.addBook(book2)
+	store.addBook(book3)
+	actualTotalPrice := store.getTotalPrice()
+
+	if len(store.books) != numberOfBooks {
+		t.Errorf("Expected %d book. Actual: %d", numberOfBooks, len(store.books))
+	}
+
+	if expectedTotalPrice != actualTotalPrice {
+		t.Errorf("Actual total price does not match. Expected: %+v, Actual: %+v", expectedTotalPrice, actualTotalPrice)
+	}
+}

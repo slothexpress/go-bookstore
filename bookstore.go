@@ -47,6 +47,10 @@ type bookStore struct {
 	books []book
 }
 
+func (bs *bookStore) getTotalPrice() int {
+	return -1
+}
+
 func (bs *bookStore) getBooksWithScoreHigherThan(minScore int) []book {
 	var filteredBooks []book
 
